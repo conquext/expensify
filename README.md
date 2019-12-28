@@ -1,4 +1,4 @@
-Bootstrap your React Project [ES6 template for React with Webpack configuration for Css, Scss, Normalize].
+App can be found at https://ex-pensify-app.herokuapp.com/
 
 ## Available Scripts
 

@@ -10,7 +10,7 @@ console.log("dir", path.dirname(require.main.filename));
 
 const fs = require("fs");
 
-fs.readdir(publicPath, (err, files) => {
+fs.readdir(__dirname, (err, files) => {
   files.forEach(file => {
     console.log(file);
   });

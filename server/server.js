@@ -2,6 +2,8 @@ const path = require("path");
 const express = require("express");
 
 const app = express();
+console.log("dirname", __dirname);
+console.log(path.join(__dirname, "..", "dist"));
 const publicPath = path.join(__dirname, "..", "dist");
 const { PORT = 30001 } = process.env;
 

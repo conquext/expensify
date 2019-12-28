@@ -3,14 +3,12 @@ const express = require("express");
 
 const app = express();
 console.log("dirname", __dirname);
-console.log(path.join(__dirname, "...", "dist"));
-const publicPath = path.join(__dirname, "..", "dist");
-console.log(path.join(publicPath, "/index.html"));
-console.log("dir", path.dirname(require.main.filename));
+console.log(path.join(__dirname, "dist"));
+const publicPath = path.join(__dirname, "dist");
 
 const fs = require("fs");
 
-fs.readdir(__dirname, (err, files) => {
+fs.readdir(publicPath, (err, files) => {
   files.forEach(file => {
     console.log(file);
   });

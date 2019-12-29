@@ -1,4 +1,3 @@
-import uuid from "uuid";
 import database from "../firebase/firebase";
 
 // ADD_EXPENSE
@@ -19,17 +18,19 @@ export const startAddExpense = (expenseData = {}) => {
 
     const expense = { description, note, amount, createdAt };
 
-    database
-      .ref(`users/${uid}/expenses`)
-      .push(expense)
-      .then(ref => {
-        dispatch(
-          addExpense({
-            id: ref.key,
-            ...expense
-          })
-        );
-      });
+    try {
+      database
+        .ref(`users/${uid}/expenses`)
+        .push(expense)
+        .then(ref => {
+          dispatch(
+            addExpense({
+              id: ref.key,
+              ...expense
+            })
+          );
+        });
+    } catch (error) {}
   };
 };
 
@@ -47,7 +48,8 @@ export const startRemoveExpense = ({ id } = {}) => {
       .remove()
       .then(() => {
         dispatch(removeExpense({ id }));
-      });
+      })
+      .catch(err => {});
   };
 };
 
@@ -66,7 +68,8 @@ export const startEditExpense = (id, updates) => {
       .update(updates)
       .then(() => {
         dispatch(editExpense(id, updates));
-      });
+      })
+      .catch(err => {});
   };
 };
 
@@ -93,6 +96,7 @@ export const startSetExpenses = () => {
         });
 
         dispatch(setExpenses(expenses));
-      });
+      })
+      .catch(err => {});
   };
 };

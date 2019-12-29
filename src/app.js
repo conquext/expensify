@@ -33,16 +33,18 @@ store.dispatch(startSetExpenses()).then(() => {
   renderApp();
 });
 
-firebase.auth().onAuthStateChanged(user => {
-  if (user) {
-    store.dispatch(login(user.uid));
-    store.dispatch(startSetExpenses()).then(() => {
+try {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      store.dispatch(login(user.uid));
+      store.dispatch(startSetExpenses()).then(() => {
+        renderApp();
+        if (history.location.pathname === "/") history.push("/dashboard");
+      });
+    } else {
+      store.dispatch(logout());
       renderApp();
-      if (history.location.pathname === "/") history.push("/dashboard");
-    });
-  } else {
-    store.dispatch(logout());
-    renderApp();
-    history.push("/");
-  }
-});
+      history.push("/");
+    }
+  });
+} catch (error) {}

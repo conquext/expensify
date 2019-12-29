@@ -6,14 +6,6 @@ console.log("dirname", __dirname);
 console.log(path.join(__dirname, "dist"));
 const publicPath = path.join(__dirname, "dist");
 
-const fs = require("fs");
-
-fs.readdir(publicPath, (err, files) => {
-  files.forEach(file => {
-    console.log(file);
-  });
-});
-
 const { PORT = 30001 } = process.env;
 
 app.use(express.static(publicPath));
